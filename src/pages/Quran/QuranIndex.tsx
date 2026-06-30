@@ -1,4 +1,5 @@
 import type { ParentComponent } from "solid-js"
+import ReadAyahList from "../../components/Quran/ReadAyahList"
 
 const QuranIndex: ParentComponent = (props) => {
   return (
@@ -7,7 +8,8 @@ const QuranIndex: ParentComponent = (props) => {
         Quran!
       </h1>
       <div class="">
-        {props.children}
+        <ReadAyahList />
+        <ReadAyahList />
       </div>
     </>
   )

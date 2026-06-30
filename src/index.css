@@ -14,18 +14,35 @@
   --color-primary-900: #332917;
   --color-primary-950: #1d170d;
 
-  /* --- SECONDARY (Muted Rose / Blush Series) --- */
-  --color-secondary-50: #fdf8f8;
-  --color-secondary-100: #f9ecec;
-  --color-secondary-200: #f3d5d5;
-  --color-secondary-300: #eab7b7;
-  --color-secondary-400: #df9292;
-  --color-secondary-500: #d06b6b;
-  --color-secondary-600: #b84d4d;
-  --color-secondary-700: #963b3b;
-  --color-secondary-800: #752faf;
-  --color-secondary-900: #4e2020;
-  --color-secondary-950: #321414;
+  /* --- SECONDARY (Soft Muted Rose / Blush Series) --- 
+     Sudah disesuaikan agar lebih lembut, kalem, dan tidak menyerupai warna merah danger.
+  */
+  --color-secondary-50: #fffafb;
+  --color-secondary-100: #fbf1f2;
+  --color-secondary-200: #f5e1e3;
+  --color-secondary-300: #eac4c8;
+  --color-secondary-400: #da9fa6;
+  --color-secondary-500: #c47680; /* Base Blush Soft */
+  --color-secondary-600: #aa5560;
+  --color-secondary-700: #8d404a;
+  --color-secondary-800: #6f3139;
+  --color-secondary-900: #4a2126;
+  --color-secondary-950: #2d1215;
+
+  /* --- MUTED (Warm Slate / Stone Gray) --- 
+     Sangat cocok untuk teks sekunder (seperti waktu bacaan, info juz kecil, atau border sekunder).
+  */
+  --color-muted-50: #f6f6f5;
+  --color-muted-100: #e7e7e4;
+  --color-muted-200: #d1d1cc;
+  --color-muted-300: #b2b2ab;
+  --color-muted-400: #919188;
+  --color-muted-500: #73736b; /* Base Muted Gray */
+  --color-muted-600: #5c5c55;
+  --color-muted-700: #4a4a44;
+  --color-muted-800: #3b3b36;
+  --color-muted-900: #272724;
+  --color-muted-950: #171715;
 
   /* --- SUCCESS (Calm Islamic Green) --- */
   --color-success-50: #f2f8f4;
@@ -78,4 +95,150 @@
   --color-danger-800: #742a2a;
   --color-danger-900: #4a1d1d;
   --color-danger-950: #2c1212;
+}
+
+@layer base {
+  html,
+  body,
+  div,
+  span,
+  applet,
+  object,
+  iframe,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  blockquote,
+  pre,
+  a,
+  abbr,
+  acronym,
+  address,
+  big,
+  cite,
+  code,
+  del,
+  dfn,
+  em,
+  img,
+  ins,
+  kbd,
+  q,
+  s,
+  samp,
+  small,
+  strike,
+  strong,
+  sub,
+  sup,
+  tt,
+  var,
+  b,
+  u,
+  i,
+  center,
+  dl,
+  dt,
+  dd,
+  ol,
+  ul,
+  li,
+  fieldset,
+  form,
+  label,
+  legend,
+  table,
+  caption,
+  tbody,
+  tfoot,
+  thead,
+  tr,
+  th,
+  td,
+  article,
+  aside,
+  canvas,
+  details,
+  embed,
+  figure,
+  figcaption,
+  footer,
+  header,
+  hgroup,
+  menu,
+  nav,
+  output,
+  ruby,
+  section,
+  summary,
+  time,
+  mark,
+  audio,
+  video {
+    font-size: 14.5px;
+    line-height: 160%;
+    font-family: "Inter", sans-serif;
+    @apply font-normal text-primary-900;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-medium relative z-10 mb-2;
+  }
+
+  h1 {
+    @apply text-4xl leading-[160%] tracking-[0.15px];
+  }
+
+  h2 {
+    @apply text-3xl leading-[160%] tracking-[0.15px];
+  }
+
+  h3 {
+    @apply text-2xl leading-[160%] tracking-[0.15px];
+  }
+
+  p {
+    @apply mb-2 leading-[160%] tracking-[0.15px];
+  }
+
+  input,
+  textarea {
+    @apply bg-muted-50 border border-muted-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-muted-400 focus:outline-primary-500;
+  }
+
+  label {
+    @apply block mb-2 text-sm;
+  }
+
+  input[type="checkbox"] {
+    @apply w-5 h-5 rounded border-primary-300 focus:ring-primary-500 focus:ring-offset-0 cursor-pointer accent-primary-700;
+  }
+
+  .btn {
+    @apply flex justify-center items-center w-full px-5 py-2.5 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm text-center transition-all text-nowrap cursor-pointer gap-2;
+  }
+
+  .btn-primary {
+    @apply text-white bg-primary-700 hover:bg-primary-800 focus:ring-primary-300;
+  }
+  .btn-secondary {
+    @apply bg-primary-100 hover:bg-primary-200 focus:ring-primary-300;
+  }
+
+  .btn-danger {
+    @apply text-white bg-danger-500/75 hover:bg-danger-500 focus:ring-danger-300;
+  }
+
+  .btn-light-danger {
+    @apply text-danger-500 bg-danger-100 hover:bg-danger-200 focus:ring-danger-300;
+  }
 }

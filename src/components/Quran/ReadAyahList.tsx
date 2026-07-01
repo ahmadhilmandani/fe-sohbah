@@ -1,11 +1,19 @@
 import { mergeProps } from "solid-js"
 import type { ParentComponent } from "solid-js/types/server/rendering.js"
 
-const ReadAyahList: ParentComponent = (props) => {
+type ReadAyahListProps = {
+  ayahArab?: number | undefined;
+  quranArab?: string | undefined;
+  quranLatin?: string | undefined;
+  translation?: string | undefined;
+};
+
+
+
+const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
   const mergedProps = mergeProps({
     ayahArab: '',
     quranArab: '',
-    ayahLatin: '',
     quranLatin: '',
     translation: ''
   }, props)
@@ -15,7 +23,7 @@ const ReadAyahList: ParentComponent = (props) => {
       <div class="border-b border-gray-200 py-8">
 
         <div class="flex justify-between items-center mb-5">
-          <div class="bg-primary-100/50 rounded-full px-3 py-1.5 text-primary-600">
+          <div class="bg-primary-100/50 rounded-full text-primary-600 size-8 flex justify-center items-center">
             {mergedProps.ayahArab}
           </div>
 

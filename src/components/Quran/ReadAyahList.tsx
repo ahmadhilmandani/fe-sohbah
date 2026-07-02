@@ -20,8 +20,8 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
 
   return (
     <>
-      <div class="border-b border-gray-200 py-8">
-
+      <div class="border-b border-gray-100 hover:cursor-pointer hover:bg-primary-50/50 p-3 lg:p-8">
+        
         <div class="flex justify-between items-center mb-5">
           <div class="bg-primary-100/50 rounded-full text-primary-600 size-8 flex justify-center items-center">
             {mergedProps.ayahArab}

@@ -1,49 +1,43 @@
 import { createSignal, For, onMount, Show, type ParentComponent } from "solid-js"
-import ReadAyahList from "../../components/Quran/ReadAyahList"
-import getSurah from "../../api/getSurah"
+import QuranIndexList from "../../components/Quran/QuranIndexList"
+import getAllSurah from "../../api/getAllSurah"
 import type { Surah } from "../../types/quran"
 
 const QuranIndex: ParentComponent = () => {
-  const [isLoading, setIsloading] = createSignal(false)
+  const [loading, setIsLoading] = createSignal(true)
 
-  const [ayah, setAyah] = createSignal<Surah>(
+  const [surahs, setSurahs] = createSignal<Surah[]>([
     {
-      nomor: 0,
-      nama: '',
-      namaLatin: '',
-      jumlahAyat: 0,
-      tempatTurun: '',
-      arti: '',
-      deskripsi: '',
-      audioFull: {
+      "nomor": 0,
+      "nama": '',
+      "namaLatin": '',
+      "jumlahAyat": 0,
+      "tempatTurun": '',
+      "arti": '',
+      "deskripsi": '',
+      "audioFull": {
         '01': ''
-      },
-      ayat: [],
-      suratSelanjutnya: {
-        nomor: 0,
-        nama: '',
-        namaLatin: '',
-        jumlahAyat: 0,
-      },
-      suratSebelumnya: false
+      }
     }
-  )
+  ])
+
 
   onMount(async () => {
-    setIsloading(true)
 
     try {
-      const res = await getSurah(1)
 
-      setAyah(res.data.data)
+      const res = await getAllSurah()
+
+      setSurahs(res.data.data)
 
     } catch (error) {
-
       console.log(error)
-
     } finally {
-      setIsloading(false)
+
+      setIsLoading(false)
+
     }
+
   })
 
   return (
@@ -53,22 +47,22 @@ const QuranIndex: ParentComponent = () => {
         Quran!
       </h1>
       <div class="">
-        <Show when={ayah()}>
-          <For each={ayah().ayat}>
-            {(ayat) => {
-              return (
-                <>
-                  <ReadAyahList
-                    ayahArab={ayat?.nomorAyat}
-                    quranArab={ayat?.teksArab}
-                    quranLatin={ayat?.teksLatin}
-                    translation={ayat?.teksIndonesia}
-                  />
-                </>
-              )
-            }}
-          </For>
-        </Show>
+        <For each={surahs()}>
+          {(row, index) => {
+            return (
+              <>
+                <QuranIndexList
+                  nomor={row.nomor}
+                  nama={row.nama}
+                  namaLatin={row.namaLatin}
+                  jumlahAyat={row.jumlahAyat}
+                  tempatTurun={row.tempatTurun}
+
+                />
+              </>
+            )
+          }}
+        </For>
       </div>
     </>
   )

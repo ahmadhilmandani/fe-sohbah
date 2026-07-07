@@ -1,8 +1,9 @@
 import { createSignal, For, onMount, Show, type ParentComponent } from "solid-js"
 import ReadAyahList from "../../components/Quran/ReadAyahList"
 import getSurah from "../../api/getSurah"
-import type { SurahDetail } from "../../types/quran"
 import { useNavigate, useParams } from "@solidjs/router"
+import type { Surah } from "../../types/surah"
+import tajweedParse from "../../api/tajwedParse"
 
 const QuranDetail: ParentComponent = () => {
   const params = useParams()
@@ -12,28 +13,27 @@ const QuranDetail: ParentComponent = () => {
 
   const [isLoading, setIsloading] = createSignal(false)
 
-  const [ayah, setAyah] = createSignal<SurahDetail>(
-    {
-      nomor: 0,
-      nama: '',
-      namaLatin: '',
-      jumlahAyat: 0,
-      tempatTurun: '',
-      arti: '',
-      deskripsi: '',
-      audioFull: {
-        '01': ''
-      },
-      ayat: [],
-      suratSelanjutnya: {
-        nomor: 0,
-        nama: '',
-        namaLatin: '',
-        jumlahAyat: 0,
-      },
-      suratSebelumnya: false
-    }
-  )
+  const [surah, setSurah] = createSignal<Surah>({
+    "number": 0,
+    "name": '',
+    "englishName": '',
+    "englishNameTranslation": '',
+    "revelationType": '',
+    "numberOfAyahs": 0,
+    "ayahs": [
+      {
+        "number": 0,
+        "text": '',
+        "numberInSurah": 0,
+        "juz": 0,
+        "manzil": 0,
+        "page": 0,
+        "ruku": 0,
+        "hizbQuarter": 0,
+        "sajda": false
+      }
+    ]
+  })
 
   onMount(async () => {
     setIsloading(true)
@@ -41,7 +41,17 @@ const QuranDetail: ParentComponent = () => {
     try {
       const res = await getSurah(surahNum)
 
-      setAyah(res.data.data)
+      const ayahs = res?.data?.data?.ayahs
+
+      await Promise.all(
+        ayahs.map(async (row) => {
+          const tajweedParsed = await tajweedParse(row.text)
+          row.text = tajweedParsed.data.tajweed_parsed
+        })
+      )
+
+
+      setSurah(res.data.data)
 
     } catch (error) {
 
@@ -72,16 +82,16 @@ const QuranDetail: ParentComponent = () => {
         Quran!
       </h1>
       <div class="">
-        <Show when={ayah()}>
-          <For each={ayah().ayat}>
-            {(ayat) => {
+        <Show when={surah()}>
+          <For each={surah().ayahs}>
+            {(ayah) => {
               return (
                 <>
                   <ReadAyahList
-                    ayahArab={ayat?.nomorAyat}
-                    quranArab={ayat?.teksArab}
-                    quranLatin={ayat?.teksLatin}
-                    translation={ayat?.teksIndonesia}
+                    ayahNum={ayah?.numberInSurah}
+                    ayahArab={ayah?.text}
+                    // quranLatin={ayah?.teksLatin}
+                    // translation={ayah?.teksIndonesia}
                   />
                 </>
               )

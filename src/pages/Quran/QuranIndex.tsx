@@ -1,12 +1,12 @@
 import { createSignal, For, onMount, Show, type ParentComponent } from "solid-js"
 import QuranIndexList from "../../components/Quran/QuranIndexList"
 import getAllSurah from "../../api/getAllSurah"
-import type { Surah } from "../../types/quran"
+import type { IDNbogorSurah } from "../../types/surahIDNbogor"
 
 const QuranIndex: ParentComponent = () => {
   const [loading, setIsLoading] = createSignal(true)
 
-  const [surahs, setSurahs] = createSignal<Surah[]>([
+  const [surahs, setSurahs] = createSignal<IDNbogorSurah[]>([
     {
       "nomor": 0,
       "nama": '',
@@ -16,7 +16,7 @@ const QuranIndex: ParentComponent = () => {
       "arti": '',
       "deskripsi": '',
       "audioFull": {
-        '01': ''
+        '0': ''
       }
     }
   ])

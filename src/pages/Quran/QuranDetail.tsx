@@ -2,11 +2,11 @@ import { createSignal, For, onMount, Show, type ParentComponent } from "solid-js
 import ReadAyahList from "../../components/Quran/ReadAyahList"
 import getSurah from "../../api/getSurah"
 import { useNavigate, useParams } from "@solidjs/router"
-import type { Surah } from "../../types/surah"
+import type { Surah } from "../../types/surahQuranCloud"
 import tajweedParse from "../../api/tajwedParse"
+import type { IDNbogorSurah } from "../../types/surahIDNbogor"
 
 const QuranDetail: ParentComponent = () => {
-  const params = useParams()
   const surahNum = parseInt(useParams().number ?? '0')
 
   const navigate = useNavigate()
@@ -35,23 +35,57 @@ const QuranDetail: ParentComponent = () => {
     ]
   })
 
+  const [surahMeta, setSurahMeta] = createSignal<IDNbogorSurah>({
+    "nomor": 0,
+    "nama": '',
+    "namaLatin": '',
+    "jumlahAyat": 0,
+    "tempatTurun": '',
+    "arti": '',
+    "deskripsi": '',
+    "audioFull": {
+      '0': ''
+    },
+    "ayat": [{
+      "nomorAyat": 0,
+      "teksArab": '',
+      "teksLatin": '',
+      "teksIndonesia": '',
+      "audio": {
+        '0': ''
+      }
+    }
+    ]
+  })
+
   onMount(async () => {
     setIsloading(true)
 
     try {
-      const res = await getSurah(surahNum)
+      const resSurah = await getSurah(surahNum, 'alquran_cloud')
 
-      const ayahs = res?.data?.data?.ayahs
+      const ayahs = resSurah?.data?.data?.ayahs
 
-      await Promise.all(
-        ayahs.map(async (row) => {
-          const tajweedParsed = await tajweedParse(row.text)
-          row.text = tajweedParsed.data.tajweed_parsed
-        })
-      )
+      if (ayahs) {
+        await Promise.all(
+          ayahs.map(async (row) => {
+            const tajweedParsed = await tajweedParse(row.text)
+            row.text = tajweedParsed.data.tajweed_parsed
+          })
+        )
+
+        const resSurahMeta = await getSurah(surahNum, 'idn_bogor')
+
+        if (resSurahMeta) {
+          setSurahMeta(resSurahMeta.data.data)
+        }
+      }
+
+      if (resSurah) {
+        setSurah(resSurah.data.data)
+      }
 
 
-      setSurah(res.data.data)
 
     } catch (error) {
 
@@ -80,18 +114,19 @@ const QuranDetail: ParentComponent = () => {
 
       <h1 class="text-3xl text-primary-500 text-center">
         Quran!
+
       </h1>
       <div class="">
         <Show when={surah()}>
           <For each={surah().ayahs}>
-            {(ayah) => {
+            {(ayah, idx) => {
               return (
                 <>
                   <ReadAyahList
                     ayahNum={ayah?.numberInSurah}
                     ayahArab={ayah?.text}
-                    // quranLatin={ayah?.teksLatin}
-                    // translation={ayah?.teksIndonesia}
+                    quranLatin={surahMeta()?.ayat?.[idx()]?.teksLatin}
+                    translation={surahMeta()?.ayat?.[idx()]?.teksIndonesia}
                   />
                 </>
               )

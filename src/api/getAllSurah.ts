@@ -1,9 +1,10 @@
 import axios from "axios";
 
-import type { ApiResponse, Surah } from "../types/quran";
+import type { ApiResponse } from "../types/apiRes";
+import type { IDNbogorSurah } from "../types/surahIDNbogor";
 
 const getAllSurah = async () => {
-  return axios.get<ApiResponse<Surah[]>>(
+  return axios.get<ApiResponse<IDNbogorSurah[]>>(
     `https://cdn.idnbogor.id/api/v1/surat`,
   );
 };

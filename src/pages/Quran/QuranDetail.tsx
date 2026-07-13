@@ -1,17 +1,57 @@
-import { createSignal, For, onMount, Show, type ParentComponent } from "solid-js"
+import { createEffect, createSignal, For, mergeProps, onMount, Show, type ParentComponent } from "solid-js"
 import ReadAyahList from "../../components/Quran/ReadAyahList"
 import getSurah from "../../api/getSurah"
 import { useNavigate, useParams } from "@solidjs/router"
 import type { Surah } from "../../types/surahQuranCloud"
 import tajweedParse from "../../api/tajwedParse"
 import type { IDNbogorSurah } from "../../types/surahIDNbogor"
+import NavbarQuran from "../../components/Quran/NavbarQuran"
+import getAllSurah from "../../api/getAllSurah"
 
-const QuranDetail: ParentComponent = () => {
-  const surahNum = parseInt(useParams().number ?? '0')
+
+type PropsType = {
+  allSurah: IDNbogorSurah[]
+}
+
+
+
+const QuranDetail: ParentComponent<PropsType> = (props) => {
+
+  const mergedProps = mergeProps({
+    'allSurah': [{
+      "nomor": 0,
+      "nama": '',
+      "namaLatin": '',
+      "jumlahAyat": 0,
+      "tempatTurun": '',
+      "arti": '',
+      "deskripsi": '',
+      "audioFull": { '0': '0' }
+    }]
+  }, props)
+
+
+  const [surahNum, setSurahNum] = createSignal(parseInt(useParams().number ?? '0'))
+
 
   const navigate = useNavigate()
 
   const [isLoading, setIsloading] = createSignal(false)
+
+    const [allSurah, setAllSurah] = createSignal<IDNbogorSurah[]>([
+    {
+      "nomor": 0,
+      "nama": '',
+      "namaLatin": '',
+      "jumlahAyat": 0,
+      "tempatTurun": '',
+      "arti": '',
+      "deskripsi": '',
+      "audioFull": {
+        '0': ''
+      }
+    }
+  ])
 
   const [surah, setSurah] = createSignal<Surah>({
     "number": 0,
@@ -58,11 +98,11 @@ const QuranDetail: ParentComponent = () => {
     ]
   })
 
-  onMount(async () => {
+  createEffect(async () => {
     setIsloading(true)
 
     try {
-      const resSurah = await getSurah(surahNum, 'alquran_cloud')
+      const resSurah = await getSurah(surahNum(), 'alquran_cloud')
 
       const ayahs = resSurah?.data?.data?.ayahs
 
@@ -74,7 +114,7 @@ const QuranDetail: ParentComponent = () => {
           })
         )
 
-        const resSurahMeta = await getSurah(surahNum, 'idn_bogor')
+        const resSurahMeta = await getSurah(surahNum(), 'idn_bogor')
 
         if (resSurahMeta) {
           setSurahMeta(resSurahMeta.data.data)
@@ -85,7 +125,9 @@ const QuranDetail: ParentComponent = () => {
         setSurah(resSurah.data.data)
       }
 
+      const resAllSurah = await getAllSurah()
 
+      setAllSurah(resAllSurah.data.data)
 
     } catch (error) {
 
@@ -98,19 +140,10 @@ const QuranDetail: ParentComponent = () => {
 
   return (
     <>
-
-      <div class="mb-4 pl-3 pt-3 lg:pl-8 lg:pt-3">
-        <button
-          onClick={() => {
-            navigate(`/quran`)
-          }}
-          type="button"
-          class="inline-flex items-center gap-2 text-sm font-medium text-muted-400 hover:text-primary-600 transition-colors cursor-pointer hover:bg-primary-50/50 rounded-md px-3 py-1.5 transition-all group"
-        >
-          <i class="ph ph-arrow-left text-muted-400 group-hover:text-primary-500"></i>
-          Back
-        </button>
-      </div>
+      <NavbarQuran
+        selectedSurah={surahNum()}
+        setSurahNum={setSurahNum}
+        allSurah={allSurah()} />
 
       <h1 class="text-3xl text-primary-500 text-center">
         Quran!

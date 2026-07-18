@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useNavigate } from "@solidjs/router";
-import { createSignal, For, Index, mergeProps, Show, type ParentComponent, type Setter } from "solid-js";
+import { createMemo, createSignal, For, Index, mergeProps, Show, type ParentComponent, type Setter } from "solid-js";
 import type { IDNbogorSurah } from "../../../types/surahIDNbogor";
 import { createOptions, Select } from "@thisbeyond/solid-select";
 
@@ -13,24 +13,6 @@ type PropsType = {
 
 
 const NavbarQuran: ParentComponent<PropsType> = (props) => {
-
-  const options1 = [
-    { name: "apple" },
-    { name: "banana" },
-    { name: "pear" },
-    { name: "pineapple" },
-    { name: "kiwi" },
-  ];
-
-  const props1 = createOptions(options1, { key: "name" });
-
-  const [selected, setSelected] = createSignal(options1.find((o) => o.name === "pear"));
-
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function lettinggo(item) {
-    console.log(item)
-  }
 
   const mergedProps = mergeProps({
     'selectedSurah': 1,
@@ -47,15 +29,29 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
     }]
   }, props)
 
+  console.log(mergedProps?.allSurah)
+
+
+  const selectOpts = createMemo(() =>
+    createOptions(mergedProps.allSurah, {
+      key: "namaLatin",
+    })
+  );
+
+  const selected = createMemo(() =>
+    mergedProps.allSurah.find(
+      (row) => row.nomor === mergedProps.selectedSurah
+    )
+  );
+
+  function handleChangeSurah(e) {
+    mergedProps.setSurahNum(e.nomor)
+  }
+
+
+
 
   const [isOpen, setIsOpen] = createSignal(false);
-
-  const navigate = useNavigate();
-
-  function handleSurahChange(e: Event & { currentTarget: HTMLSelectElement }) {
-    mergedProps.setSurahNum(parseInt(e?.currentTarget?.value))
-    // navigate(`/quran/${e?.currentTarget?.value}`)
-  }
 
   return (
     <nav class="bg-white border-b border-muted-200 sticky top-8 left-0 right-0 -translate-y-8 z-50 rounded-t-lg">
@@ -78,8 +74,9 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
 
         {/* TENGAH: Dua Input Sejajar (Surah & Ayat) */}
         <div class="flex-1 max-w-xs flex gap-2">
-          <Select {...props1} initialValue={selected()} onChange={lettinggo} />
-
+          <div class="w-48">
+          <Select {...selectOpts} initialValue={selected()} onChange={handleChangeSurah} />
+          </div>
         </div>
 
         {/* KANAN (Desktop): Ikon Aksi & Menu Toggle */}

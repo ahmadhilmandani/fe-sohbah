@@ -1,7 +1,5 @@
-import './App.css'
 import { Route, Router } from '@solidjs/router'
 import MainLayout from './layouts/MainLayouts'
-import HomeIndex from './pages/Home/HomeIndex'
 
 import "@thisbeyond/solid-select/style.css";
 import QuranIndex from './features/quran/pages/QuranIndex'
@@ -13,7 +11,7 @@ function App() {
     <>
       <Router>
         <Route component={MainLayout}>
-          <Route path={'/'} component={HomeIndex} />
+          <Route path={'/'} component={QuranIndex} />
           <Route path={'/quran'} component={QuranIndex} />
           <Route path={'/quran/:number'} component={QuranDetail} />
         </Route>

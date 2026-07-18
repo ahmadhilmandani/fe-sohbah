@@ -311,7 +311,7 @@
     color: #169200;
     cursor: pointer;
   }
-  
+
   tajweed.idgh_w_ghn {
     color: #169200;
   }
@@ -397,4 +397,37 @@
   tajweed.idgh_mus:hover {
     background-color: #d7d7d7;
   }
+/* 
+  .solid-select-container {
+    @apply text-xs;
+  }
+
+  .solid-select-control {
+    @apply block w-full p-2 border border-muted-300 rounded-lg bg-muted-50 text-muted-900;
+  }
+
+  .solid-select-control:focus-within {
+    @apply border-primary-500 ring-2 ring-primary-500;
+  }
+
+  .solid-select-placeholder {
+    @apply text-muted-500;
+  }
+
+  .solid-select-list {
+    @apply mt-1 rounded-lg border border-muted-300 bg-white shadow;
+  }
+
+  .solid-select-option {
+    @apply p-2 cursor-pointer;
+  }
+
+  .solid-select-option:hover,
+  .solid-select-option[data-focused] {
+    @apply bg-muted-100;
+  }
+
+  .solid-select-option[data-selected] {
+    @apply bg-primary-500 text-white;
+  } */
 }

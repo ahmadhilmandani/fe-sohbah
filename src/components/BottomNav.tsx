@@ -3,8 +3,8 @@ import { A } from "@solidjs/router";
 export default function BottomNav() {
   return (
     <>
-      <div class="fixed bottom-0 max-w-2xl w-full mx-auto z-10">
-        <div class="py-3 rounded-lg bg-white/30 backdrop-blur-xl border border-muted-500/25 shadow-lg">
+      <div class="sticky bottom-0 mx-auto  max-w-7xl w-full  z-10">
+        <div class="py-3 rounded-lg bg-white/30 backdrop-blur-xl border border-muted-500/25 shadow-lg mx-auto">
           <div class="grid h-full grid-cols-3">
 
             <A href="home"

@@ -1,6 +1,8 @@
+// @ts-nocheck
 import { useNavigate } from "@solidjs/router";
 import { createSignal, For, Index, mergeProps, Show, type ParentComponent, type Setter } from "solid-js";
 import type { IDNbogorSurah } from "../../types/surahIDNbogor";
+import { createOptions, Select } from "@thisbeyond/solid-select";
 
 
 type PropsType = {
@@ -11,6 +13,24 @@ type PropsType = {
 
 
 const NavbarQuran: ParentComponent<PropsType> = (props) => {
+
+  const options1 = [
+    { name: "apple" },
+    { name: "banana" },
+    { name: "pear" },
+    { name: "pineapple" },
+    { name: "kiwi" },
+  ];
+
+  const props1 = createOptions(options1, { key: "name" });
+
+  const [selected, setSelected] = createSignal(options1.find((o) => o.name === "pear"));
+
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  function lettinggo(item) {
+    console.log(item)
+  }
 
   const mergedProps = mergeProps({
     'selectedSurah': 1,
@@ -52,40 +72,14 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
           >
             <i class="ph ph-arrow-left text-muted-400 group-hover:text-primary-500"></i>
             Back
+
           </button>
         </div>
 
         {/* TENGAH: Dua Input Sejajar (Surah & Ayat) */}
         <div class="flex-1 max-w-xs flex gap-2">
-          <select
-            onChange={(e) => { handleSurahChange(e) }}
-            id="select-surah"
-            class="block w-full p-2 text-muted-900 border border-muted-300 rounded-lg bg-muted-50 text-xs focus:ring-primary-500 focus:border-primary-500"
-          >
-            <option value="">Pilih Surah</option>
-            <For each={mergedProps.allSurah}>
-              {(row) => {
-                return (
-                  <>
-                    <option value={row.nomor} selected={row.nomor == mergedProps.selectedSurah}>{row.namaLatin}</option>
-                  </>
-                )
-              }}
+          <Select {...props1} initialValue={selected()} onChange={lettinggo} />
 
-            </For>
-          </select>
-
-          <select
-            id="select-ayat"
-            class="block w-32 p-2 text-muted-900 border border-muted-300 rounded-lg bg-muted-50 text-xs focus:ring-primary-500 focus:border-primary-500"
-          >
-            {/* jumlahAyat */}
-            <Index each={Array.from({ length: mergedProps?.allSurah?.[mergedProps?.selectedSurah - 1]?.jumlahAyat })}>
-              {(_, index) => (
-                <option value="">{index + 1}</option>
-              )}
-            </Index>
-          </select>
         </div>
 
         {/* KANAN (Desktop): Ikon Aksi & Menu Toggle */}

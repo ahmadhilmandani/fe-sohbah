@@ -1,7 +1,5 @@
-import { createSignal, For, onMount, type ParentComponent } from "solid-js"
+import { For, type ParentComponent } from "solid-js"
 import QuranIndexList from "../components/QuranIndexList"
-import type { IDNbogorSurah } from "../../../types/surahIDNbogor"
-import getAllSurah from "../../../api/getAllSurah"
 import { useSurahHook } from "../hooks/useSurah"
 
 
@@ -17,7 +15,7 @@ const QuranIndex: ParentComponent = () => {
       <div class="">
         <div class="mt-10 flex justify-center items-center mb-5 px-8">
         </div>
-        <For each={useSurah.surah()}>
+        <For each={useSurah.surahAll()}>
           {(row) => {
             return (
               <>

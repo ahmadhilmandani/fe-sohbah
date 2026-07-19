@@ -3,53 +3,19 @@ import { useNavigate } from "@solidjs/router";
 import { createMemo, createSignal, For, Index, mergeProps, Show, type ParentComponent, type Setter } from "solid-js";
 import type { IDNbogorSurah } from "../../../types/surahIDNbogor";
 import { createOptions, Select } from "@thisbeyond/solid-select";
+import { useOptsSurah } from "../hooks/useOptsSurah";
 
 
 type PropsType = {
-  selectedSurah: number,
-  setSurahNum: Setter<number>,
   allSurah: IDNbogorSurah[]
 }
 
 
 const NavbarQuran: ParentComponent<PropsType> = (props) => {
 
-  const mergedProps = mergeProps({
-    'selectedSurah': 1,
-    'setSurahNum': () => { },
-    'allSurah': [{
-      "nomor": 0,
-      "nama": '',
-      "namaLatin": '',
-      "jumlahAyat": 0,
-      "tempatTurun": '',
-      "arti": '',
-      "deskripsi": '',
-      "audioFull": { '0': '0' }
-    }]
-  }, props)
+  const navigate = useNavigate()
 
-  console.log(mergedProps?.allSurah)
-
-
-  const selectOpts = createMemo(() =>
-    createOptions(mergedProps.allSurah, {
-      key: "namaLatin",
-    })
-  );
-
-  const selected = createMemo(() =>
-    mergedProps.allSurah.find(
-      (row) => row.nomor === mergedProps.selectedSurah
-    )
-  );
-
-  function handleChangeSurah(e) {
-    mergedProps.setSurahNum(e.nomor)
-  }
-
-
-
+  const optsSurah = useOptsSurah(props)
 
   const [isOpen, setIsOpen] = createSignal(false);
 
@@ -75,7 +41,13 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         {/* TENGAH: Dua Input Sejajar (Surah & Ayat) */}
         <div class="flex-1 max-w-xs flex gap-2">
           <div class="w-48">
-          <Select {...selectOpts} initialValue={selected()} onChange={handleChangeSurah} />
+            <Show when={props.allSurah.length}>
+                <Select
+                    {...optsSurah.selectOpts()}
+                    initialValue={optsSurah.selected()}
+                    onChange={optsSurah.handleChangeSurah}
+                />
+            </Show>
           </div>
         </div>
 

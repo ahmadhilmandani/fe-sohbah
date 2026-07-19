@@ -1,5 +1,6 @@
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 import { mergeProps, type ParentComponent } from "solid-js";
+import { setSelectedSurah } from "../../../stores/selectedSurahStore";
 
 type QuranIndexListT = {
   'nomor': number,
@@ -10,6 +11,9 @@ type QuranIndexListT = {
 }
 
 const QuranIndexList: ParentComponent<QuranIndexListT> = (props) => {
+  
+  const navigate = useNavigate()
+
   const mergedProps = mergeProps({
     'nomor': 0,
     'nama': '',
@@ -18,9 +22,17 @@ const QuranIndexList: ParentComponent<QuranIndexListT> = (props) => {
     'tempatTurun': ''
   }, props)
 
+  
+  const goToReadSurah = () => {
+
+    navigate('surah')
+
+    setSelectedSurah(mergedProps.nomor)
+  }
+
   return (
     <>
-      <A href={`${mergedProps.nomor}`} class="block border-b border-muted-100 hover:cursor-pointer hover:bg-primary-50/40 p-3 lg:p-8 ">
+      <div onClick={goToReadSurah} class="block border-b border-muted-100 hover:cursor-pointer hover:bg-primary-50/40 p-3 lg:p-8 ">
 
         <div class="flex justify-between items-center mb-5 gap-5">
           <div class="flex justify-between items-center gap-3">
@@ -41,7 +53,7 @@ const QuranIndexList: ParentComponent<QuranIndexListT> = (props) => {
             {mergedProps.nama}
           </div>
         </div>
-      </A>
+      </div>
     </>
   )
 }

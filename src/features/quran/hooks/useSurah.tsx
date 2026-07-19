@@ -4,11 +4,9 @@ import type { IDNbogorSurah } from "../../../types/surahIDNbogor"
 import getSurah from "../../../api/getSurah"
 import tajweedParse from "../../../api/tajwedParse"
 import type { Surah } from "../../../types/surahQuranCloud"
-import { useParams } from "@solidjs/router"
+import { selectedSurah } from "../../../stores/selectedSurahStore"
 
 export const useSurahHook = () => {
-
-  const params = useParams()
 
   const [loading, setIsLoading] = createSignal<boolean>(false)
 
@@ -77,13 +75,6 @@ export const useSurahHook = () => {
       '0': ''
     }
   });
-
-  const [
-    selectedSurah,
-    setSelectedSurah
-  ] = createSignal<number>(
-    parseInt(params?.number || '0')
-  )
 
   async function getAll() {
 
@@ -157,8 +148,6 @@ export const useSurahHook = () => {
 
   return {
     surahAll,
-    selectedSurah,
-    setSelectedSurah,
     surahDetail,
     surahMeta
   }

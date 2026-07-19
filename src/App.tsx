@@ -13,7 +13,7 @@ function App() {
         <Route component={MainLayout}>
           <Route path={'/'} component={QuranIndex} />
           <Route path={'/quran'} component={QuranIndex} />
-          <Route path={'/quran/:number'} component={QuranDetail} />
+          <Route path={'/quran/surah'} component={QuranDetail} />
         </Route>
       </Router>
     </>

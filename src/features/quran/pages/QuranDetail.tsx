@@ -13,8 +13,6 @@ const QuranDetail = () => {
   return (
     <>
       <NavbarQuran
-        selectedSurah={useSurah?.selectedSurah()}
-        setSurahNum={useSurah.setSelectedSurah}
         allSurah={useSurah.surahAll()} />
 
       <h1 class="text-3xl text-primary-500 text-center">

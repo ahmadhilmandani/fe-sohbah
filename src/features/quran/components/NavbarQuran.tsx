@@ -32,7 +32,7 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
               navigate(`/quran`)
             }}
             type="button"
-            class="inline-flex items-center gap-2 text-sm font-medium text-muted-400 hover:text-primary-600 transition-colors cursor-pointer hover:bg-primary-50/50 rounded-md px-3 py-1.5 transition-all group"
+            class="inline-flex items-center gap-2 text-sm font-medium text-muted-400 hover:text-primary-600 transition-colors cursor-pointer hover:bg-primary-50/45 rounded-md px-3 py-1.5 transition-all group"
           >
             <i class="ph ph-arrow-left text-muted-400 group-hover:text-primary-500"></i>
             Back
@@ -41,7 +41,7 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         </div>
 
         {/* TENGAH: Dua Input Sejajar (Surah & Ayat) */}
-        <div class="flex-1 max-w-xs flex gap-2">
+        <div class="flex-1 max-w-xs flex gap-2 items-center">
           <div class="w-48">
             <Show when={props.allSurah.length}>
               <Select
@@ -69,10 +69,10 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
           {/* Ikon Sejajar: Tanya & Gear */}
           <div class="hidden sm:flex items-center space-x-1">
             <button type="button" class="p-2 text-muted-600 hover:bg-muted-100 rounded-lg transition-colors" aria-label="Bantuan">
-              <i class="ph ph-question"></i>
+              <i class="ph ph-question text-xl"></i>
             </button>
             <button type="button" class="p-2 text-muted-600 hover:bg-muted-100 rounded-lg transition-colors" aria-label="Pengaturan">
-              <i class="ph ph-gear-six"></i>
+              <i class="ph ph-gear-six text-xl"></i>
             </button>
           </div>
 

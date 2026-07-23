@@ -4,6 +4,7 @@ import { createMemo, createSignal, For, Index, mergeProps, Show, type ParentComp
 import type { IDNbogorSurah } from "../../../types/surahIDNbogor";
 import { createOptions, Select } from "@thisbeyond/solid-select";
 import { useOptsSurah } from "../hooks/useOptsSurah";
+import { useNavSurah } from "../hooks/useNavSurah";
 
 
 type PropsType = {
@@ -16,6 +17,7 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
   const navigate = useNavigate()
 
   const optsSurah = useOptsSurah(props)
+  const navigationSurah = useNavSurah()
 
   const [isOpen, setIsOpen] = createSignal(false);
 
@@ -42,11 +44,22 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         <div class="flex-1 max-w-xs flex gap-2">
           <div class="w-48">
             <Show when={props.allSurah.length}>
-                <Select
-                    {...optsSurah.selectOpts()}
-                    initialValue={optsSurah.selected()}
-                    onChange={optsSurah.handleChangeSurah}
-                />
+              <Select
+                class="custom"
+                {...optsSurah.selectOpts()}
+                initialValue={optsSurah.selected()}
+                onChange={navigationSurah.navbarChangeSurah}
+              />
+            </Show>
+          </div>
+          <div class="w-32">
+            <Show when={props.allSurah.length}>
+              <Select
+                class="custom"
+                {...optsSurah.surahAyah()}
+                initialValue={optsSurah.surahAyahSeleced()}
+                onChange={navigationSurah.goToAyah}
+              />
             </Show>
           </div>
         </div>

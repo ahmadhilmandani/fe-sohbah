@@ -1,7 +1,6 @@
 import { Route, Router } from '@solidjs/router'
 import MainLayout from './layouts/MainLayouts'
 
-import "@thisbeyond/solid-select/style.css";
 import QuranIndex from './features/quran/pages/QuranIndex'
 import QuranDetail from './features/quran/pages/QuranDetail';
 

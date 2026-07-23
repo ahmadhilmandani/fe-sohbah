@@ -1,7 +1,9 @@
 import { createOptions } from "@thisbeyond/solid-select";
 import { createMemo, type Setter } from "solid-js";
 import type { IDNbogorSurah } from "../../../types/surahIDNbogor";
-import { selectedSurah, setSelectedSurah } from "../../../stores/selectedSurahStore";
+import { selectedSurah } from "../../../stores/selectedSurahStore";
+import { selectedAyahStore } from "../../../stores/selectedAyahStore";
+import { ayahStore } from "../../../stores/ayahStore";
 
 
 type PropsType = {
@@ -10,26 +12,46 @@ type PropsType = {
 
 
 export const useOptsSurah = (props: PropsType) => {
+  let selectOpts
+  let selected
+  let surahAyah
+  let surahAyahSeleced
 
-  const selectOpts = createMemo(() =>
-    createOptions(props.allSurah, {
-      key: "namaLatin",
-    })
-  );
+  if (props) {
+    selectOpts = createMemo(() =>
+      createOptions(props.allSurah, {
+        key: "namaLatin",
+      })
+    );
 
-  const selected = createMemo(() =>
-    props.allSurah.find(
-      (row) => row.nomor === selectedSurah()
-    )
-  );
+    selected = createMemo(() =>
+      props?.allSurah?.find(
+        (row) => row.nomor === selectedSurah()
+      )
+    );
 
-  function handleChangeSurah(e: IDNbogorSurah) {
-    setSelectedSurah(e.nomor)
+    surahAyah = createMemo(() => {
+      const numbers = Array.from(
+        { length: ayahStore() },
+        (_, index) => index + 1
+      );
+
+      return createOptions(numbers);
+    });
+
+    surahAyahSeleced = createMemo(() => {
+      return selectedAyahStore();
+    });
+
   }
+
+  
+
 
   return {
     selectOpts,
     selected,
-    handleChangeSurah
+    surahAyah,
+    surahAyahSeleced
   }
 }

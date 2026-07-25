@@ -113,8 +113,8 @@ export const useSurahHook = () => {
           console.log(row)
           const tajweedParsed = await tajweedParse(row.text)
           row.text = tajweedParsed.data.tajweed_parsed
-          row.text = row.text
-            + convertIntoArabNum(row.numberInSurah)
+          row.text = row.text + `
+            <span class='inline-block mx-2 arabic-number text-6xl text-secondary-400'>${convertIntoArabNum(row.numberInSurah)}</span>`
 
         }))
 

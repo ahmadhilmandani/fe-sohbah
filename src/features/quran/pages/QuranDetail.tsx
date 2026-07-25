@@ -29,7 +29,7 @@ const QuranDetail = () => {
             </div>
             •
             <div class="text-muted-500">
-              {useSurah.surahMeta().jumlahAyat}
+              {useSurah.surahMeta().jumlahAyat} ayat
 
             </div>
           </div>

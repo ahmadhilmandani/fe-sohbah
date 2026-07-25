@@ -15,11 +15,30 @@ const QuranDetail = () => {
       <NavbarQuran
         allSurah={useSurah.surahAll()} />
 
-      <h1 class="text-3xl text-primary-500 text-center">
-        Quran!
+      <div>
+        <div class="flex flex-col items-center justify-center gap-1 my-12">
+          <h1 class="text-5xl mb-0 leading-[120%]">
+            {useSurah.surahMeta().nama}
+          </h1>
+          <h1 class="text-xl mb-0 leading-[120%] text-primary-900">
+            {useSurah.surahMeta().namaLatin}
+          </h1>
+          <div class="flex gap-3 items-center text-muted-500">
+            <div class="text-muted-500">
+              {useSurah.surahMeta().tempatTurun}
+            </div>
+            •
+            <div class="text-muted-500">
+              {useSurah.surahMeta().jumlahAyat}
 
-      </h1>
-      <div class="">
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-12 text-7xl text-center font-thin stroke-0" style='direction:rtl'>
+          بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ
+        </div>
+
         <Show when={useSurah.surahDetail()}>
           <For each={useSurah.surahDetail().ayahs}>
             {(ayah, idx) => {

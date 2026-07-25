@@ -5,6 +5,7 @@ import getSurah from "../../../api/getSurah"
 import tajweedParse from "../../../api/tajwedParse"
 import type { Surah } from "../../../types/surahQuranCloud"
 import { selectedSurah } from "../../../stores/selectedSurahStore"
+import convertIntoArabNum from "../../../helpers/convertIntoArabNum"
 
 export const useSurahHook = () => {
 
@@ -109,8 +110,11 @@ export const useSurahHook = () => {
       if (resSurahDetail) {
         await Promise.all(resSurahDetail?.data?.data?.ayahs?.map(async (row) => {
 
+          console.log(row)
           const tajweedParsed = await tajweedParse(row.text)
           row.text = tajweedParsed.data.tajweed_parsed
+          row.text = row.text
+            + convertIntoArabNum(row.numberInSurah)
 
         }))
 

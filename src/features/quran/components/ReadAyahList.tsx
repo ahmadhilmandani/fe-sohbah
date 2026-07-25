@@ -1,5 +1,7 @@
 import { mergeProps } from "solid-js"
 import type { ParentComponent } from "solid-js/types/server/rendering.js"
+import convertIntoArabNum from "../../../helpers/convertIntoArabNum";
+
 
 type ReadAyahListProps = {
   ayahNum?: number | undefined;
@@ -20,24 +22,22 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
 
   return (
     <>
-      <div class="border-b border-gray-100 hover:cursor-pointer hover:bg-primary-50/50 p-3 lg:p-8">
-        
-        <div class="flex justify-between items-center mb-5">
-          <div class="bg-primary-100/50 rounded-full text-primary-600 size-8 flex justify-center items-center">
-            {mergedProps.ayahNum}
-          </div>
+      <div class="border-b-[0.8px] border-muted-200 hover:cursor-pointer hover:bg-tertiary-50/35 p-3 lg:p-8">
 
+        <div class="flex justify-end items-center mb-5">
           <div>
             <i class="ph ph-dots-three text-3xl"></i>
           </div>
 
         </div>
 
-        <div class="text-right text-3xl font-light">
-          <div class="text-5xl leading-[200%]" innerHTML={mergedProps.ayahArab} />
+        <div class="text-3xl font-light">
+          <div class="text-5xl leading-[200%] text-pretty" style='direction: rtl;' innerHTML={
+            mergedProps.ayahArab
+            } />
         </div>
 
-        <div class="mt-5 text-primary-600">
+        <div class="mt-5 text-primary-400">
           {mergedProps.quranLatin}
         </div>
 
@@ -47,11 +47,11 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
 
         <div class="mt-5 flex items-center gap-3">
 
-          <i class="ph ph-play-circle text-lg text-gray-500/70 bg-gray-50 p-2.5 rounded-full"></i>
+          <i class="ph ph-play-circle text-lg text-primary-500 bg-primary-50 p-2.5 rounded-full"></i>
 
-          <i class="ph ph-bookmark-simple text-lg text-gray-500/70 bg-gray-50 p-2.5 rounded-full"></i>
+          <i class="ph ph-bookmark-simple text-lg text-primary-500 bg-primary-50 p-2.5 rounded-full"></i>
 
-          <i class="ph ph-share text-lg text-gray-500/70 bg-gray-50 p-2.5 rounded-full"></i>
+          <i class="ph ph-share text-lg text-primary-500 bg-primary-50 p-2.5 rounded-full"></i>
 
         </div>
 

@@ -22,7 +22,7 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
   const [isOpen, setIsOpen] = createSignal(false);
 
   return (
-    <nav class="bg-white border-b border-muted-200 sticky top-8 left-0 right-0 -translate-y-8 z-50 rounded-t-lg">
+    <nav class="bg-white border-b-[0.8px] border-muted-200 sticky top-8 left-0 right-0 -translate-y-8 z-50 rounded-t-lg">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 gap-4 md:gap-0">
 
         {/* KIRI: Tombol Back */}
@@ -32,9 +32,9 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
               navigate(`/quran`)
             }}
             type="button"
-            class="inline-flex items-center gap-2 text-sm font-medium text-muted-400 hover:text-primary-600 transition-colors cursor-pointer hover:bg-primary-50/45 rounded-md px-3 py-1.5 transition-all group"
+            class="inline-flex items-center gap-2 text-sm font-medium text-muted-500 hover:text-primary-500 cursor-pointer hover:bg-primary-50/65 rounded-md px-3 py-1.5 transition-all group"
           >
-            <i class="ph ph-arrow-left text-muted-400 group-hover:text-primary-500"></i>
+            <i class="ph ph-arrow-left text-muted-500 group-hover:text-primary-500"></i>
             Back
 
           </button>
@@ -68,11 +68,11 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         <div class="flex items-center space-x-2">
           {/* Ikon Sejajar: Tanya & Gear */}
           <div class="hidden sm:flex items-center space-x-1">
-            <button type="button" class="p-2 text-muted-600 hover:bg-muted-100 rounded-lg transition-colors" aria-label="Bantuan">
-              <i class="ph ph-question text-xl"></i>
+            <button type="button" class="aspect-square p-2 text-muted-500 cursor-pointer hover:bg-primary-50/65 rounded-md transition-all group" aria-label="Bantuan">
+              <i class="ph ph-question text-xl text-muted-500 group-hover:text-primary-500"></i>
             </button>
-            <button type="button" class="p-2 text-muted-600 hover:bg-muted-100 rounded-lg transition-colors" aria-label="Pengaturan">
-              <i class="ph ph-gear-six text-xl"></i>
+            <button type="button" class="aspect-square p-2 text-muted-500 cursor-pointer hover:bg-primary-50/65 rounded-md transition-all group"aria-label="Pengaturan">
+              <i class="ph ph-gear-six text-xl text-muted-500 group-hover:text-primary-500"></i>
             </button>
           </div>
 

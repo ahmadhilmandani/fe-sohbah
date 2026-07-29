@@ -1,16 +1,8 @@
 
-import { Show, type Accessor, type ParentComponent } from "solid-js";
+import { Show } from "solid-js";
 import useNavDropdown from "../../hooks/useNavDropdown";
 
-
-type PropsType = {
-  isOpen: Accessor<boolean>,
-  toggle: () => void
-
-}
-
-
-const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
+const NavbarQuranRightItem = () => {
 
   const navDropdown = useNavDropdown()
 

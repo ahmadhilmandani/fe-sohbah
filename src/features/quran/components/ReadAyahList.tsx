@@ -1,6 +1,5 @@
 import { mergeProps } from "solid-js"
 import type { ParentComponent } from "solid-js/types/server/rendering.js"
-import convertIntoArabNum from "../../../helpers/convertIntoArabNum";
 
 
 type ReadAyahListProps = {

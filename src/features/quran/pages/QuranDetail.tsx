@@ -1,10 +1,7 @@
 import { For, Show } from "solid-js"
-import NavbarQuran from "../components/NavbarQuran"
+import NavbarQuran from "../components/Navbar/NavbarQuran"
 import ReadAyahList from "../components/ReadAyahList"
 import { useSurahHook } from "../hooks/useSurah"
-
-
-
 
 const QuranDetail = () => {
 
@@ -13,7 +10,8 @@ const QuranDetail = () => {
   return (
     <>
       <NavbarQuran
-        allSurah={useSurah.surahAll()} />
+        allSurah={useSurah.surahAll()}
+      />
 
       <div>
         <div class="flex flex-col items-center justify-center gap-1 my-12">

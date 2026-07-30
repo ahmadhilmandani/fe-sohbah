@@ -10,6 +10,7 @@ import convertIntoArabNum from "../../../helpers/convertIntoArabNum"
 export const useSurahHook = () => {
 
   const [loading, setIsLoading] = createSignal<boolean>(false)
+  const [isTajweed, setIsTajweed] = createSignal<boolean>(true)
 
   const [
     surahAll,
@@ -105,7 +106,7 @@ export const useSurahHook = () => {
 
     try {
 
-      let resSurahDetail = await getSurah(selectedSurah(), 'alquran_cloud')
+      let resSurahDetail = await getSurah(selectedSurah(), 'alquran_cloud', isTajweed())
 
       if (resSurahDetail) {
         await Promise.all(resSurahDetail?.data?.data?.ayahs?.map(async (row) => {
@@ -153,6 +154,8 @@ export const useSurahHook = () => {
   return {
     surahAll,
     surahDetail,
-    surahMeta
+    surahMeta,
+    isTajweed,
+    setIsTajweed
   }
 }

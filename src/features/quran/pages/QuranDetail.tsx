@@ -14,6 +14,8 @@ const QuranDetail = () => {
     <>
       <NavbarQuran
         allSurah={useSurah.surahAll()}
+        isTajweed={useSurah.isTajweed()}
+        setIsTajweed={useSurah.setIsTajweed}
         ayahArabic={fontSize.ayahArabic()}
         ayahLatin={fontSize.ayahLatin()}
         translation={fontSize.translation()}

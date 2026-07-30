@@ -1,5 +1,5 @@
 
-import { Show, type ParentComponent } from "solid-js";
+import { Show, type ParentComponent, type Setter } from "solid-js";
 import useNavDropdown from "../../hooks/useNavDropdown";
 
 type PropsType = {
@@ -9,6 +9,8 @@ type PropsType = {
   changeAyahArabSize: (size: string) => void;
   changeAyahLatinSize: (size: string) => void;
   changeTranslationSize: (size: string) => void;
+  isTajweed: boolean;
+  setIsTajweed: Setter<boolean>;
 }
 
 const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
@@ -42,12 +44,20 @@ const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
 
                   <div class="flex items-center gap-8">
                     <div class="flex items-center gap-2">
-                      <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4  accent-primary-400" />
-                      <label for="default-radio-1" class="">Iya</label>
+                      <input id="default-radio-1" type="radio"
+                        value={props.isTajweed.toString()} name="default-radio"
+                        class="w-4 h-4  accent-primary-400"
+                        checked={props.isTajweed.toString() === "true"}
+                        onChange={() => { props.setIsTajweed(true) }} />
+                      <label for="default-radio-1" class="mb-0">Iya</label>
                     </div>
                     <div class="flex items-center gap-2">
-                      <input id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4  accent-primary-400" />
-                      <label for="default-radio-2" class="">Tidak</label>
+                      <input id="default-radio-2" type="radio"
+                        value={props.isTajweed.toString()} name="default-radio"
+                        class="w-4 h-4  accent-primary-400"
+                        checked={props.isTajweed.toString() === "false"}
+                        onChange={() => { props.setIsTajweed(false) }} />
+                      <label for="default-radio-2" class="mb-0">Tidak</label>
                     </div>
                   </div>
                 </div>

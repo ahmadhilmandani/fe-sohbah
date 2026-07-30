@@ -13,6 +13,8 @@ type PropsType = {
   changeAyahArabSize: (size: string) => void;
   changeAyahLatinSize: (size: string) => void;
   changeTranslationSize: (size: string) => void;
+  isTajweed: boolean;
+  setIsTajweed: Setter<boolean>;
 }
 
 
@@ -30,12 +32,14 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
 
         {/* KANAN (Desktop): Ikon Aksi & Menu Toggle */}
         <NavbarQuranRightItem
+          isTajweed={props.isTajweed}
           ayahArabic={props.ayahArabic}
           ayahLatin={props.ayahLatin}
           translation={props.translation}
           changeAyahArabSize={props.changeAyahArabSize}
           changeAyahLatinSize={props.changeAyahLatinSize}
           changeTranslationSize={props.changeTranslationSize}
+          setIsTajweed={props.setIsTajweed}
         />
 
       </div>

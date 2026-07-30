@@ -2,15 +2,24 @@ import { For, Show } from "solid-js"
 import NavbarQuran from "../components/Navbar/NavbarQuran"
 import ReadAyahList from "../components/ReadAyahList"
 import { useSurahHook } from "../hooks/useSurah"
+import useFontSize from "../hooks/useFontSize"
 
 const QuranDetail = () => {
 
   const useSurah = useSurahHook()
 
+  const fontSize = useFontSize()
+
   return (
     <>
       <NavbarQuran
         allSurah={useSurah.surahAll()}
+        ayahArabic={fontSize.ayahArabic()}
+        ayahLatin={fontSize.ayahLatin()}
+        translation={fontSize.translation()}
+        changeAyahArabSize={fontSize.changeAyahArabSize}
+        changeAyahLatinSize={fontSize.changeAyahLatinSize}
+        changeTranslationSize={fontSize.changeTranslationSize}
       />
 
       <div>
@@ -28,7 +37,6 @@ const QuranDetail = () => {
             •
             <div class="text-muted-500">
               {useSurah.surahMeta().jumlahAyat} ayat
-
             </div>
           </div>
         </div>
@@ -47,6 +55,9 @@ const QuranDetail = () => {
                     ayahArab={ayah?.text}
                     quranLatin={useSurah.surahMeta()?.ayat?.[idx()]?.teksLatin}
                     translation={useSurah.surahMeta()?.ayat?.[idx()]?.teksIndonesia}
+                    ayahArabicSz={fontSize.ayahArabic()}
+                    ayahLatinSz={fontSize.ayahLatin()}
+                    translationSz={fontSize.translation()}
                   />
                 </>
               )

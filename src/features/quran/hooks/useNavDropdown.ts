@@ -3,9 +3,9 @@ import { createSignal, onCleanup, onMount } from "solid-js";
 const useNavDropdown = () => {
   const [isOpen, setIsOpen] = createSignal(false);
 
-  let btnDropdownRef!: HTMLButtonElement;
+  let btnDropdownRef!: HTMLDivElement;
 
-  const setBtnRef = (el: HTMLButtonElement) => {
+  const setBtnRef = (el: HTMLDivElement) => {
     btnDropdownRef = el;
   };
 
@@ -14,7 +14,6 @@ const useNavDropdown = () => {
 
     if (btnDropdownRef.contains(target)) {
       setIsOpen(true);
-
       return;
     }
 

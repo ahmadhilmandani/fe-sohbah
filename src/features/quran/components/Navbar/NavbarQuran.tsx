@@ -1,15 +1,18 @@
-import { useNavigate } from "@solidjs/router";
-import { type ParentComponent } from "solid-js";
+import { type ParentComponent, type Setter } from "solid-js";
 import type { IDNbogorSurah } from "../../../../types/surahIDNbogor";
-import { useOptsSurah } from "../../hooks/useOptsSurah";
-import { useNavSurah } from "../../hooks/useNavSurah";
 import NavbarQuranRightItem from "./NavbarQuranRightItem"
 import NavbarQuranLeftItem from "./NavbarQuranLeftItem";
 import NavbarQuranMiddleItem from "./NavbarQuranMiddleItem";
 
 
 type PropsType = {
-  allSurah: IDNbogorSurah[]
+  allSurah: IDNbogorSurah[];
+  ayahArabic: number;
+  ayahLatin: number;
+  translation: number;
+  changeAyahArabSize: (size: string) => void;
+  changeAyahLatinSize: (size: string) => void;
+  changeTranslationSize: (size: string) => void;
 }
 
 
@@ -26,7 +29,14 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         <NavbarQuranMiddleItem allSurah={props.allSurah} />
 
         {/* KANAN (Desktop): Ikon Aksi & Menu Toggle */}
-        <NavbarQuranRightItem />
+        <NavbarQuranRightItem
+          ayahArabic={props.ayahArabic}
+          ayahLatin={props.ayahLatin}
+          translation={props.translation}
+          changeAyahArabSize={props.changeAyahArabSize}
+          changeAyahLatinSize={props.changeAyahLatinSize}
+          changeTranslationSize={props.changeTranslationSize}
+        />
 
       </div>
     </nav>

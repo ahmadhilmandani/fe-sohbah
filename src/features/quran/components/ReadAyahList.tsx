@@ -7,9 +7,10 @@ type ReadAyahListProps = {
   ayahArab?: string | undefined;
   quranLatin?: string | undefined;
   translation?: string | undefined;
+  ayahArabicSz: number;
+  ayahLatinSz: number;
+  translationSz: number;
 };
-
-
 
 const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
   const mergedProps = mergeProps({
@@ -31,16 +32,28 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
         </div>
 
         <div class="text-3xl font-light">
-          <div class="text-5xl leading-[200%] text-pretty" style='direction: rtl;' innerHTML={
+          <div class={`leading-[200%] text-pretty`} innerHTML={
             mergedProps.ayahArab
-            } />
+          }
+            style={{
+              "direction": "rtl",
+              "font-size": `${mergedProps.ayahArabicSz}px`
+            }}
+          />
         </div>
 
-        <div class="mt-5 text-primary-400">
+        <div class={`mt-5 text-primary-400`}
+          style={{
+            "font-size": `${mergedProps.ayahLatinSz}px`
+          }}>
           {mergedProps.quranLatin}
         </div>
 
-        <div class="mt-8">
+        <div class={`mt-8`}
+          style={{
+            "font-size": `${mergedProps.translationSz}px`
+          }}
+        >
           {mergedProps.translation}
         </div>
 

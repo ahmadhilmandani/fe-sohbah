@@ -2,26 +2,16 @@ import { For, Show } from "solid-js"
 import NavbarQuran from "../components/Navbar/NavbarQuran"
 import ReadAyahList from "../components/ReadAyahList"
 import { useSurahHook } from "../hooks/useSurah"
-import useFontSize from "../hooks/useFontSize"
+
 
 const QuranDetail = () => {
 
   const useSurah = useSurahHook()
 
-  const fontSize = useFontSize()
-
   return (
     <>
       <NavbarQuran
         allSurah={useSurah.surahAll()}
-        isTajweed={useSurah.isTajweed()}
-        setIsTajweed={useSurah.setIsTajweed}
-        ayahArabic={fontSize.ayahArabic()}
-        ayahLatin={fontSize.ayahLatin()}
-        translation={fontSize.translation()}
-        changeAyahArabSize={fontSize.changeAyahArabSize}
-        changeAyahLatinSize={fontSize.changeAyahLatinSize}
-        changeTranslationSize={fontSize.changeTranslationSize}
       />
 
       <div>
@@ -48,23 +38,22 @@ const QuranDetail = () => {
         </div>
 
         <Show when={useSurah.surahDetail()}>
-          <For each={useSurah.surahDetail().ayahs}>
-            {(ayah, idx) => {
-              return (
-                <>
-                  <ReadAyahList
-                    ayahNum={ayah?.numberInSurah}
-                    ayahArab={ayah?.text}
-                    quranLatin={useSurah.surahMeta()?.ayat?.[idx()]?.teksLatin}
-                    translation={useSurah.surahMeta()?.ayat?.[idx()]?.teksIndonesia}
-                    ayahArabicSz={fontSize.ayahArabic()}
-                    ayahLatinSz={fontSize.ayahLatin()}
-                    translationSz={fontSize.translation()}
-                  />
-                </>
-              )
-            }}
-          </For>
+          <div>
+            <For each={useSurah.surahDetail().ayahs}>
+              {(ayah, idx) => {
+                return (
+                  <>
+                    <ReadAyahList
+                      ayahNum={ayah?.numberInSurah}
+                      ayahArab={ayah?.text}
+                      quranLatin={useSurah.surahMeta()?.ayat?.[idx()]?.teksLatin}
+                      translation={useSurah.surahMeta()?.ayat?.[idx()]?.teksIndonesia}
+                    />
+                  </>
+                )
+              }}
+            </For>
+          </div>
         </Show>
       </div>
     </>

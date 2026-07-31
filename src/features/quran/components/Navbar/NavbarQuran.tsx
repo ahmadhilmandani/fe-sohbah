@@ -1,4 +1,4 @@
-import { type ParentComponent, type Setter } from "solid-js";
+import { type ParentComponent } from "solid-js";
 import type { IDNbogorSurah } from "../../../../types/surahIDNbogor";
 import NavbarQuranRightItem from "./NavbarQuranRightItem"
 import NavbarQuranLeftItem from "./NavbarQuranLeftItem";
@@ -7,14 +7,6 @@ import NavbarQuranMiddleItem from "./NavbarQuranMiddleItem";
 
 type PropsType = {
   allSurah: IDNbogorSurah[];
-  ayahArabic: number;
-  ayahLatin: number;
-  translation: number;
-  changeAyahArabSize: (size: string) => void;
-  changeAyahLatinSize: (size: string) => void;
-  changeTranslationSize: (size: string) => void;
-  isTajweed: boolean;
-  setIsTajweed: Setter<boolean>;
 }
 
 
@@ -31,16 +23,7 @@ const NavbarQuran: ParentComponent<PropsType> = (props) => {
         <NavbarQuranMiddleItem allSurah={props.allSurah} />
 
         {/* KANAN (Desktop): Ikon Aksi & Menu Toggle */}
-        <NavbarQuranRightItem
-          isTajweed={props.isTajweed}
-          ayahArabic={props.ayahArabic}
-          ayahLatin={props.ayahLatin}
-          translation={props.translation}
-          changeAyahArabSize={props.changeAyahArabSize}
-          changeAyahLatinSize={props.changeAyahLatinSize}
-          changeTranslationSize={props.changeTranslationSize}
-          setIsTajweed={props.setIsTajweed}
-        />
+        <NavbarQuranRightItem />
 
       </div>
     </nav>

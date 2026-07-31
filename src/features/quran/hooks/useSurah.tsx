@@ -6,11 +6,11 @@ import tajweedParse from "../../../api/tajwedParse"
 import type { Surah } from "../../../types/surahQuranCloud"
 import { selectedSurah } from "../../../stores/selectedSurahStore"
 import convertIntoArabNum from "../../../helpers/convertIntoArabNum"
+import { isTajweed } from "../stores/readingSettingStore"
 
 export const useSurahHook = () => {
 
   const [loading, setIsLoading] = createSignal<boolean>(false)
-  const [isTajweed, setIsTajweed] = createSignal<boolean>(true)
 
   const [
     surahAll,
@@ -26,16 +26,7 @@ export const useSurahHook = () => {
       "deskripsi": '',
       "audioFull": {
         '0': ''
-      },
-      "ayat": [{
-        "nomorAyat": 0,
-        "teksArab": '',
-        "teksLatin": '',
-        "teksIndonesia": '',
-        "audio": {
-          '0': ''
-        }
-      }]
+      }
     }
   ])
 
@@ -154,8 +145,8 @@ export const useSurahHook = () => {
   return {
     surahAll,
     surahDetail,
-    surahMeta,
-    isTajweed,
-    setIsTajweed
+    surahMeta
+    
+    
   }
 }

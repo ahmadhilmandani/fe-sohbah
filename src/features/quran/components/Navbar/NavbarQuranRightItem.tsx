@@ -1,19 +1,13 @@
 
-import { Show, type ParentComponent, type Setter } from "solid-js";
+import { Show, type ParentComponent } from "solid-js";
 import useNavDropdown from "../../hooks/useNavDropdown";
+import useQuranSetting from "../../hooks/useQuranSetting";
 
-type PropsType = {
-  ayahArabic: number;
-  ayahLatin: number;
-  translation: number;
-  changeAyahArabSize: (size: string) => void;
-  changeAyahLatinSize: (size: string) => void;
-  changeTranslationSize: (size: string) => void;
-  isTajweed: boolean;
-  setIsTajweed: Setter<boolean>;
-}
 
-const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
+
+const NavbarQuranRightItem: ParentComponent = () => {
+
+  const quranSetting = useQuranSetting()
 
   const navDropdown = useNavDropdown()
 
@@ -45,18 +39,18 @@ const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
                   <div class="flex items-center gap-8">
                     <div class="flex items-center gap-2">
                       <input id="default-radio-1" type="radio"
-                        value={props.isTajweed.toString()} name="default-radio"
+                        value={quranSetting.isTajweed().toString()} name="default-radio"
                         class="w-4 h-4  accent-primary-400"
-                        checked={props.isTajweed.toString() === "true"}
-                        onChange={() => { props.setIsTajweed(true) }} />
+                        checked={quranSetting.isTajweed().toString() === "true"}
+                        onChange={() => { quranSetting.toggleTajweed(true) }} />
                       <label for="default-radio-1" class="mb-0">Iya</label>
                     </div>
                     <div class="flex items-center gap-2">
                       <input id="default-radio-2" type="radio"
-                        value={props.isTajweed.toString()} name="default-radio"
+                        value={quranSetting.isTajweed().toString()} name="default-radio"
                         class="w-4 h-4  accent-primary-400"
-                        checked={props.isTajweed.toString() === "false"}
-                        onChange={() => { props.setIsTajweed(false) }} />
+                        checked={quranSetting.isTajweed().toString() === "false"}
+                        onChange={() => { quranSetting.toggleTajweed(false) }} />
                       <label for="default-radio-2" class="mb-0">Tidak</label>
                     </div>
                   </div>
@@ -68,23 +62,23 @@ const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
                     <div class="input-group group">
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeAyahArabSize(
-                            (props.ayahArabic - 1).toString()
+                          quranSetting.changeAyahArabSize(
+                            (quranSetting.ayahArabic() - 1).toString()
                           )
                         }}
                       >
                         <i class="ph ph-minus text-sm"></i>
                       </div>
                       <input type="text"
-                        value={`${props.ayahArabic}`}
+                        value={`${quranSetting.ayahArabic()}`}
                         onInput={
                           (e) => {
-                            props.changeAyahArabSize(e.target.value)
+                            quranSetting.changeAyahArabSize(e.target.value)
                           }} />
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeAyahArabSize(
-                            (props.ayahArabic + 1).toString()
+                          quranSetting.changeAyahArabSize(
+                            (quranSetting.ayahArabic() + 1).toString()
                           )
                         }}
                       >
@@ -97,23 +91,23 @@ const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
                     <div class="input-group group">
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeAyahLatinSize(
-                            (props.ayahLatin - 1).toString()
+                          quranSetting.changeAyahLatinSize(
+                            (quranSetting.ayahLatin() - 1).toString()
                           )
                         }}
                       >
                         <i class="ph ph-minus text-sm"></i>
                       </div>
                       <input type="text"
-                        value={`${props.ayahLatin}`}
+                        value={`${quranSetting.ayahLatin()}`}
                         onInput={
                           (e) => {
-                            props.changeAyahLatinSize(e.target.value)
+                            quranSetting.changeAyahLatinSize(e.target.value)
                           }} />
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeAyahLatinSize(
-                            (props.ayahLatin + 1).toString()
+                          quranSetting.changeAyahLatinSize(
+                            (quranSetting.ayahLatin() + 1).toString()
                           )
                         }}
                       >
@@ -126,23 +120,23 @@ const NavbarQuranRightItem: ParentComponent<PropsType> = (props) => {
                     <div class="input-group group">
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeTranslationSize(
-                            (props.translation - 1).toString()
+                          quranSetting.changeTranslationSize(
+                            (quranSetting.translation() - 1).toString()
                           )
                         }}
                       >
                         <i class="ph ph-minus"></i>
                       </div>
                       <input type="text"
-                        value={`${props.translation}`}
+                        value={`${quranSetting.translation()}`}
                         onInput={
                           (e) => {
-                            props.changeTranslationSize(e.target.value)
+                            quranSetting.changeTranslationSize(e.target.value)
                           }} />
                       <div class="add-on with-hover"
                         onClick={() => {
-                          props.changeTranslationSize(
-                            (props.translation + 1).toString()
+                          quranSetting.changeTranslationSize(
+                            (quranSetting.translation() + 1).toString()
                           )
                         }}
                       >

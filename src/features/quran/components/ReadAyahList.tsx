@@ -1,5 +1,6 @@
 import { mergeProps } from "solid-js"
 import type { ParentComponent } from "solid-js/types/server/rendering.js"
+import useQuranSetting from "../hooks/useQuranSetting";
 
 
 type ReadAyahListProps = {
@@ -7,12 +8,13 @@ type ReadAyahListProps = {
   ayahArab?: string | undefined;
   quranLatin?: string | undefined;
   translation?: string | undefined;
-  ayahArabicSz: number;
-  ayahLatinSz: number;
-  translationSz: number;
 };
 
 const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
+
+  const quranSetting = useQuranSetting()
+
+
   const mergedProps = mergeProps({
     ayahNum: 0,
     ayahArab: '',
@@ -22,7 +24,9 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
 
   return (
     <>
-      <div class="border-b-[0.8px] border-muted-200 hover:cursor-pointer hover:bg-tertiary-50/35 p-3 lg:p-8">
+      <div id={mergedProps.ayahNum.toString()}
+        class="border-b-[0.8px] border-muted-200 hover:cursor-pointer hover:bg-tertiary-50/35 p-3 lg:p-8"
+      >
 
         <div class="flex justify-end items-center mb-5">
           <div>
@@ -37,21 +41,21 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
           }
             style={{
               "direction": "rtl",
-              "font-size": `${mergedProps.ayahArabicSz}px`
+              "font-size": `${quranSetting.ayahArabic()}px`
             }}
           />
         </div>
 
         <div class={`mt-5 text-primary-400`}
           style={{
-            "font-size": `${mergedProps.ayahLatinSz}px`
+            "font-size": `${quranSetting.ayahLatin()}px`
           }}>
           {mergedProps.quranLatin}
         </div>
 
         <div class={`mt-8`}
           style={{
-            "font-size": `${mergedProps.translationSz}px`
+            "font-size": `${quranSetting.translation()}px`
           }}
         >
           {mergedProps.translation}

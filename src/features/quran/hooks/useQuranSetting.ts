@@ -8,19 +8,10 @@ import {
   setTranslation,
   translation,
   isTajweed,
-  setIsTajweed
+  setIsTajweed,
 } from "../stores/readingSettingStore";
 
 const useQuranSetting = () => {
-  ayahArabic;
-  setAyahArabic;
-  ayahLatin;
-  setAyahLatin;
-  translation;
-  setTranslation;
-  inVerseNum;
-  setInVerseNum;
-
   function changeAyahArabSize(size: string) {
     setAyahArabic(parseFloat(size));
   }
@@ -56,7 +47,7 @@ const useQuranSetting = () => {
     changeAyahLatinSize,
     changeTranslationSize,
     changeUserReadVerse,
-    toggleTajweed
+    toggleTajweed,
   };
 };
 

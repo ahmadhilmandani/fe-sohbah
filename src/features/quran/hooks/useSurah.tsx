@@ -102,7 +102,6 @@ export const useSurahHook = () => {
       if (resSurahDetail) {
         await Promise.all(resSurahDetail?.data?.data?.ayahs?.map(async (row) => {
 
-          console.log(row)
           const tajweedParsed = await tajweedParse(row.text)
           row.text = tajweedParsed.data.tajweed_parsed
           row.text = row.text + `

@@ -24,7 +24,7 @@ const ReadAyahList: ParentComponent<ReadAyahListProps> = (props) => {
 
   return (
     <>
-      <div id={mergedProps.ayahNum.toString()}
+      <div id={`ayah-${mergedProps.ayahNum.toString()}`}
         class="border-b-[0.8px] border-muted-200 hover:cursor-pointer hover:bg-tertiary-50/35 p-3 lg:p-8"
       >
 

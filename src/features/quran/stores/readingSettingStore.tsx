@@ -12,6 +12,8 @@ const [isTajweed, setIsTajweed] = createSignal(true);
 
 const [inVerseNum, setInVerseNum] = createSignal(1);
 
+let [containerAyahSelect, setContainerAyahSelect] = createSignal<HTMLDivElement>();
+
 
 export {
   ayahArabic,
@@ -23,5 +25,7 @@ export {
   inVerseNum,
   setInVerseNum,
   isTajweed,
-  setIsTajweed
+  setIsTajweed,
+  containerAyahSelect,
+  setContainerAyahSelect
 }

@@ -3,9 +3,11 @@ import { setSelectedSurah } from "../../../stores/selectedSurahStore";
 import { useNavigate } from "@solidjs/router";
 import { setSelectedAyahStore } from "../../../stores/selectedAyahStore";
 import { setAyahStore } from "../../../stores/ayahStore";
+import { containerAyahSelect } from "../stores/readingSettingStore";
 
 
 export const useNavSurah = () => {
+
   const navigate = useNavigate()
 
   function handleChangeAyah(num: number) {
@@ -29,7 +31,17 @@ export const useNavSurah = () => {
   }
 
   function goToAyah(num: number) {
+
     handleChangeAyah(num)
+
+    const element = containerAyahSelect()?.querySelector(`#ayah-${num}`);
+
+    element?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+
+
   }
 
   return {

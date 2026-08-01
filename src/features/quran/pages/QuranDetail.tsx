@@ -2,7 +2,7 @@ import { For, Show } from "solid-js"
 import NavbarQuran from "../components/Navbar/NavbarQuran"
 import ReadAyahList from "../components/ReadAyahList"
 import { useSurahHook } from "../hooks/useSurah"
-
+import { setContainerAyahSelect } from "../stores/readingSettingStore"
 
 const QuranDetail = () => {
 
@@ -38,7 +38,7 @@ const QuranDetail = () => {
         </div>
 
         <Show when={useSurah.surahDetail()}>
-          <div>
+          <div ref={setContainerAyahSelect}>
             <For each={useSurah.surahDetail().ayahs}>
               {(ayah, idx) => {
                 return (

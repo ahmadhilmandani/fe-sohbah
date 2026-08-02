@@ -3,6 +3,10 @@ import NavbarQuran from "../components/Navbar/NavbarQuran"
 import ReadAyahList from "../components/ReadAyahList"
 import { useSurahHook } from "../hooks/useSurah"
 import { setContainerAyahSelect } from "../stores/readingSettingStore"
+import { CardNextSurah } from "../components/CardNextSurah"
+import { CardPrevSurah } from "../components/CardPrevSurah"
+import { selectedSurah } from "../../../stores/selectedSurahStore"
+
 
 const QuranDetail = () => {
 
@@ -53,6 +57,27 @@ const QuranDetail = () => {
                 )
               }}
             </For>
+          </div>
+
+          <div class="mt-12 mb-40 relative">
+            <Show when={selectedSurah() - 2 >= 0}>
+              <div class="w-fit absolute left-5 bottom-0 top-5">
+                <CardPrevSurah
+                  nomor={useSurah?.surahAll?.()[selectedSurah() - 2]?.nomor}
+                  namaLatin={useSurah?.surahAll?.()[selectedSurah() - 2]?.namaLatin}
+                  numOfAyah={useSurah?.surahAll?.()[selectedSurah() - 2]?.jumlahAyat}
+                />
+              </div>
+            </Show>
+            <Show when={selectedSurah() + 1 <= 114}>
+              <div class="w-fit absolute right-5 bottom-0 top-5">
+                <CardNextSurah
+                  nomor={useSurah?.surahAll?.()[selectedSurah()]?.nomor}
+                  namaLatin={useSurah?.surahAll?.()[selectedSurah()]?.namaLatin}
+                  numOfAyah={useSurah?.surahAll?.()[selectedSurah()]?.jumlahAyat}
+                />
+              </div>
+            </Show>
           </div>
         </Show>
       </div>

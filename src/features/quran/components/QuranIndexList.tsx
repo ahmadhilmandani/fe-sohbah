@@ -27,7 +27,7 @@ const QuranIndexList: ParentComponent<QuranIndexListT> = (props) => {
 
 
   const goToReadSurah = () => {
-    navSurah.clickChangeSurah(
+    navSurah.clickSurahListItem(
       mergedProps.nomor,
       mergedProps.jumlahAyat
     )
@@ -39,7 +39,7 @@ const QuranIndexList: ParentComponent<QuranIndexListT> = (props) => {
 
         <div class="flex justify-between items-center mb-5 gap-5">
           <div class="flex justify-between items-center gap-3">
-            <div class="bg-primary-50 rounded-full text-primary-600 size-12 flex justify-center items-center text-3xl">
+            <div class="bg-primary-50 rounded-full text-primary-600 size-12.5 flex justify-center items-center text-2xl">
               {convertIntoArabNum(mergedProps.nomor)}
             </div>
             <div>

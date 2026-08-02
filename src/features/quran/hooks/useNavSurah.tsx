@@ -24,9 +24,13 @@ export const useNavSurah = () => {
     handleChangeSurah(e.nomor, e.jumlahAyat)
   }
 
-  function clickChangeSurah(num: number, numOfAyah: number) {
+  function clickSurahListItem(num: number, numOfAyah: number) {
     navigate('surah')
 
+    handleChangeSurah(num, numOfAyah)
+  }
+
+  function clickSurahNavigation(num: number, numOfAyah: number) {
     handleChangeSurah(num, numOfAyah)
   }
 
@@ -46,7 +50,8 @@ export const useNavSurah = () => {
 
   return {
     navbarChangeSurah,
-    clickChangeSurah,
+    clickSurahListItem,
+    clickSurahNavigation,
     goToAyah
   }
 }

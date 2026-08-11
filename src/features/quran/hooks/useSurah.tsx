@@ -144,8 +144,8 @@ export const useSurahHook = () => {
   return {
     surahAll,
     surahDetail,
-    surahMeta
-    
-    
+    surahMeta,
+    loading
   }
+
 }

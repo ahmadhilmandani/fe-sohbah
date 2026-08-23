@@ -10,7 +10,7 @@ import { isTajweed } from "../stores/readingSettingStore"
 
 export const useSurahHook = () => {
 
-  const [loading, setIsLoading] = createSignal<boolean>(false)
+  const [loading, setIsLoading] = createSignal<boolean>(true)
 
   const [
     surahAll,

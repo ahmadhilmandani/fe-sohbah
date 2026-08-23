@@ -11,8 +11,6 @@ import SkeletonQuranDetail from "../components/Skeleton/SkeletonQuranDetail"
 
 const QuranDetail = () => {
 
-  const test = true;
-
   const useSurah = useSurahHook()
 
   return (

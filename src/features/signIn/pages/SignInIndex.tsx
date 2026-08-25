@@ -53,7 +53,7 @@ const SignInIndex: ParentComponent = () => {
         <div class="max-w-[560px] w-full mb-5">
           <div class="text-center text-muted-500">
             Belum punya akun? &nbsp
-            <A href='/' class="text-primary-500 underline cursor-pointer">Daftar di sini!</A>.
+            <A href='/sign-up' class="text-primary-500 underline cursor-pointer">Daftar di sini!</A>.
           </div>
         </div>
         <div class="max-w-[560px] w-full mb-5 flex justify-center items-center gap-3">

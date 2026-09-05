@@ -3,8 +3,10 @@ import logoOriginal from "../../../assets/img/logo-original.png"
 import logoCircleOriginal from "../../../assets/img/logo-circle-original.png"
 import logoGoole from "../../../assets/img/logo-google.webp"
 import { A } from "@solidjs/router"
+import GoogleLogin from "../components/BtnSignWithGoogle"
 
 const SignInIndex: ParentComponent = () => {
+  let signInGoogleBtn;
 
   return (
     <>
@@ -67,13 +69,13 @@ const SignInIndex: ParentComponent = () => {
             1
           </div>
         </div>
-        <div class="max-w-[560px] w-full mb-5 flex justify-center items-center gap-3 bg-muted-50 border-[0.8px] h-9 border-muted-200 text-sm rounded-lg py-1.5 px-2.5 placeholder-muted-400 outline-0 hover:border-primary-300 hover:bg-primary-50/65 transition-all cursor-pointer group transition-all">
-          <img src={logoGoole} alt="" class="h-full" />
-          <div class="group-hover:font-medium transition-all">
-            Masuk dengan google
-          </div>
+        <div class="max-w-[560px] w-full ">
+
+          <GoogleLogin />
+
         </div>
       </div>
+
     </>
   )
 }

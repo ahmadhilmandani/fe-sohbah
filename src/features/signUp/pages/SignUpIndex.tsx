@@ -3,11 +3,14 @@ import logoOriginal from "../../../assets/img/logo-original.png"
 import logoCircleOriginal from "../../../assets/img/logo-circle-original.png"
 import logoGoole from "../../../assets/img/logo-google.webp"
 import { A } from "@solidjs/router"
+import Modal from "../../../components/Modal"
 
 const SignUpIndex: ParentComponent = () => {
 
   return (
     <>
+      <Modal />
+      
       <div class="flex justify-center items-center mx-auto mb-5">
         <img src={logoCircleOriginal} alt="" class="max-h-[26px]" />
         <img src={logoOriginal} alt="" class="max-h-[38px] -ml-1 mt-2" />

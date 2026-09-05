@@ -17,6 +17,7 @@
     "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
+    "@types/google.accounts": "^0.0.18",
     "@types/node": "^24.13.2",
     "typescript": "~6.0.2",
     "vite": "^8.1.0",

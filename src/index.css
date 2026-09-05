@@ -283,7 +283,7 @@
   }
 
   .btn-secondary {
-    @apply text-muted-600 bg-muted-200/70 hover:bg-muted-200 focus:ring-muted-300;
+    @apply text-muted-600 bg-muted-200/55 hover:bg-muted-200 focus:ring-muted-300;
   }
 
   .btn-info {

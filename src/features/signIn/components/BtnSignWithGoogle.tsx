@@ -7,7 +7,7 @@ interface GoogleCredentialResponse {
   select_by?: string;
 }
 
-const GoogleLogin:ParentComponent = () => {
+const GoogleLogin: ParentComponent = () => {
   let buttonDiv; // Ref untuk elemen DOM tempat tombol Google dirender
 
   onMount(() => {
@@ -31,25 +31,26 @@ const GoogleLogin:ParentComponent = () => {
   // 3. Fungsi Callback saat pengguna selesai login
   async function handleCredentialResponse(response: GoogleCredentialResponse) {
     // response.credential berisi ID Token (JWT)
+    console.log(response)
     console.log('Google ID Token:', response.credential);
 
     // Kirim ID Token ke backend Express.js kamu
-    // try {
-    //   const res = await fetch('http://localhost:5000/api/auth/google', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ idToken: response.credential })
-    //   });
+    try {
+      const res = await fetch('http://localhost:3000/api/auth/sign-in', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: response.credential })
+      });
 
-    //   const data = await res.json();
-    //   console.log('Response backend:', data);
-    // } catch (err) {
-    //   console.error('Gagal mengirim token ke backend:', err);
-    // }
+      const data = await res.json();
+      console.log('Response backend:', data);
+    } catch (err) {
+      console.error('Gagal mengirim token ke backend:', err);
+    }
   }
 
   return (
-      <div class='-mt-3' ref={buttonDiv}>button</div>
+    <div class='-mt-3' ref={buttonDiv}>button</div>
   );
 }
 
